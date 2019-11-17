@@ -2,6 +2,7 @@
   "name": "redux-remodel",
   "version": "0.1.1",
   "description": "Create reducers from simple declarative data models",
+  "keywords": ["redux", "react", "reducer", "model", "immer", "immutable"],
   "author": "gingerich",
   "license": "MIT",
   "repository": "gingerich/redux-remodel",
