@@ -32,17 +32,17 @@ const config = {
       plugins: [ 'external-helpers' ]
     }),
     resolve(),
-    commonjs(),
-    generatePackageJson({
-      baseContents: ({
-        ...pkg,
-        private: undefined,
-        scripts: undefined,
-        main: path.basename(pkg.main),
-        module: path.basename(pkg.module),
-        files: ['./**/*.js']
-      })
-    })
+    commonjs()
+    // generatePackageJson({
+    //   baseContents: ({
+    //     ...pkg,
+    //     private: undefined,
+    //     scripts: undefined,
+    //     main: path.basename(pkg.main),
+    //     module: path.basename(pkg.module),
+    //     files: ['./**/*.js']
+    //   })
+    // })
   ]
 }
 
