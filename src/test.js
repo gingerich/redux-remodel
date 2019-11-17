@@ -1,7 +1,7 @@
 import { createModel } from '.'
 
 describe('createModel', () => {
-  it('is truthy', () => {
-    expect(createModel({})).toBeTruthy()
+  it('should require initialState to be defined', () => {
+    expect(() => createModel()).toThrow()
   })
 })
