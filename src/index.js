@@ -1,5 +1,3 @@
-import { useReducer, useMemo } from 'react'
-import { bindActionCreators } from 'redux'
 import { createAction, createSelector } from '@reduxjs/toolkit'
 import reduceReducers from 'reduce-reducers'
 import purify, { original } from 'immer'
@@ -105,6 +103,9 @@ export function createComputed(properties) {
   }
 }
 
+export const select = (reducer, selector) =>
+  Object.assign(reducer, { selector })
+
 const makeSelector = selector => {
   if (typeof selector === 'function') {
     return selector
@@ -113,17 +114,4 @@ const makeSelector = selector => {
     return state => state[selector]
   }
   return state => state
-}
-
-export const select = (reducer, selector) =>
-  Object.assign(reducer, { selector })
-
-export function useModel(reducer, initialState) {
-  const [state, dispatch] = useReducer(reducer, initialState, reducer)
-
-  useMemo(() => {
-    Object.assign(dispatch, bindActionCreators(reducer.actions, dispatch))
-  }, [reducer.actions])
-
-  return [state, dispatch]
 }

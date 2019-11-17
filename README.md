@@ -9,11 +9,6 @@ Create reducers from simple declarative data models
 npm install --save redux-remodel
 ```
 
-To ensure we don't bundle duplicate React instances in the example app we'll link to the root level node_modules
-```bash
-cd example && npm link ../node_module/react
-```
-
 ## Usage
 
 ```jsx

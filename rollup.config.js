@@ -1,22 +1,24 @@
+import path from 'path'
 import babel from 'rollup-plugin-babel'
 import commonjs from 'rollup-plugin-commonjs'
 import external from 'rollup-plugin-peer-deps-external'
-import postcss from 'rollup-plugin-postcss'
 import resolve from 'rollup-plugin-node-resolve'
 import url from 'rollup-plugin-url'
-import svgr from '@svgr/rollup'
+import generatePackageJson from 'rollup-plugin-generate-package-json'
 
 import pkg from './package.json'
 
-export default {
+const config = {
   input: 'src/index.js',
   output: [
     {
+      dir: 'dist',
       file: pkg.main,
       format: 'cjs',
       sourcemap: true
     },
     {
+      dir: 'dist',
       file: pkg.module,
       format: 'es',
       sourcemap: true
@@ -24,16 +26,27 @@ export default {
   ],
   plugins: [
     external(),
-    postcss({
-      modules: true
-    }),
     url(),
-    svgr(),
     babel({
       exclude: 'node_modules/**',
       plugins: [ 'external-helpers' ]
     }),
     resolve(),
-    commonjs()
+    commonjs(),
+    generatePackageJson({
+      baseContents: ({
+        ...pkg,
+        private: undefined,
+        scripts: undefined,
+        main: path.basename(pkg.main),
+        module: path.basename(pkg.module),
+        files: ['./**/*.js']
+      })
+    })
   ]
 }
+
+export default [
+  config,
+  require('./rollup.config.react')
+]
