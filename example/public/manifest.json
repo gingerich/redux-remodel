@@ -1,0 +1,8 @@
+{
+  "short_name": "react-test-library",
+  "name": "react-test-library",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
