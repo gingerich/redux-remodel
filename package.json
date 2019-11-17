@@ -1,6 +1,6 @@
 {
   "name": "redux-remodel",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Create reducers from simple declarative data models",
   "author": "gingerich",
   "license": "MIT",
