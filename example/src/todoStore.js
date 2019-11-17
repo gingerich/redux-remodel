@@ -38,9 +38,7 @@ const todos = createModel([], {
 })
 
 // Compose reducer functions wih slices
-const model = createModel(
-  {},
-  {
+const model = createModel({}, {
     slices: {
       todos
     },
