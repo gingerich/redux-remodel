@@ -12,13 +12,11 @@ const config = {
   input: 'src/index.js',
   output: [
     {
-      dir: 'dist',
       file: pkg.main,
       format: 'cjs',
       sourcemap: true
     },
     {
-      dir: 'dist',
       file: pkg.module,
       format: 'es',
       sourcemap: true

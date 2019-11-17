@@ -5,9 +5,9 @@
   "author": "gingerich",
   "license": "MIT",
   "repository": "gingerich/redux-remodel",
-  "main": "index.js",
-  "module": "index.es.js",
-  "jsnext:main": "index.es.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "jsnext:main": "dist/index.es.js",
   "engines": {
     "node": ">=8",
     "npm": ">=5"
@@ -61,7 +61,8 @@
     "dist"
   ],
   "exports": {
-    "./": "./dist/"
+    "./": "./dist/",
+    ".": "./dist"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.0.4",
