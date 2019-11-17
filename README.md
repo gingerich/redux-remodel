@@ -1,7 +1,7 @@
 # redux-remodel
 Create reducers from simple declarative data models
 
-[![NPM](https://img.shields.io/npm/v/redux-remodel.svg)](https://www.npmjs.com/package/redux-remodel) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/redux-remodel.svg)](https://www.npmjs.com/package/redux-remodel) [![Build Status](https://travis-ci.com/gingerich/redux-remodel.svg?branch=master)](https://travis-ci.com/gingerich/redux-remodel) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com) 
 
 ## Install
 
@@ -54,6 +54,8 @@ const todos = createModel([], {
 Use todos to compose another model
 
 ```jsx
+import { createModel, select } from 'redux-remodel'
+
 const app = createModel({}, {
     slices: {
       todos
