@@ -11,14 +11,14 @@ npm install --save redux-remodel
 
 ## Usage
 
-Create a todos model
+Define a todos model
 
 ```jsx
 import { createModel } from 'redux-remodel'
 
 const uuid = () => Math.round(Math.random()*10000)
 
-const todos = createModel([], {
+const todos = {
   actions: {
     addTodo: (todos, { payload }) => {
       todos.push({ id: uuid(), title: payload })
@@ -48,7 +48,9 @@ const todos = createModel([], {
       return todos.filter(t => t.id !== todo.id)
     }
   }
-})
+}
+
+const todosReducer = createModel([], todos)
 ```
 
 Use todos to compose another model
@@ -56,13 +58,20 @@ Use todos to compose another model
 ```jsx
 import { createModel, select } from 'redux-remodel'
 
-const app = createModel({}, {
+const initialState = { view: 'all' }
+
+const app = createModel(initialState, {
     slices: {
-      todos
+      todos: createModel([], todos)
     },
     computed: {
       active: select(todos => todos.filter(t => !t.completed), 'todos'),
       completed: select(todos => todos.filter(t => t.completed), 'todos')
+    },
+    actions: {
+      setView: (state, { payload: view }) => {
+        state.view = view
+      }
     }
   }
 )
@@ -75,7 +84,14 @@ let state
 state = app(state, app.actions.addTodo('My Todo'))
 
 console.log(state)
-// { todos: [{ id: 123, title: 'My Todo' }], active: [{ id: 123, title: 'My Todo' }], completed: [] }
+/*
+{
+  view: 'all',
+  todos: [{ id: 123, title: 'My Todo' }],
+  active: [{ id: 123, title: 'My Todo' }],
+  completed: []
+}
+*/
 ```
 
 ## License
