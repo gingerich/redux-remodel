@@ -1,13 +1,30 @@
-import React, { Component } from 'react'
+import React from "react";
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
+import { App as Todos } from "./TodoApp";
+import Store from "./store";
 
-import ExampleComponent from 'react-test-library'
-
-export default class App extends Component {
-  render () {
-    return (
-      <div>
-        <ExampleComponent text='Modern React component module' />
-      </div>
-    )
-  }
+// Mock current user
+const currentUser = {
+  id: '123'
 }
+
+export default () => (
+  <Store.Provider>
+    <Router basename="/todos">
+      <Switch>
+        <Route
+          path="/:userId/:view?"
+          render={({ match }) => (
+            <Todos userId={match.params.userId} view={match.params.view} />
+          )}
+        />
+        <Redirect to={`/${currentUser.id}`} />
+      </Switch>
+    </Router>
+  </Store.Provider>
+);

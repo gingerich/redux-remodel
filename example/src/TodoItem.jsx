@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { Store } from "./todoStore";
+import Store from "./store";
 import { ENTER_KEY, ESCAPE_KEY } from "./constants";
 
 const mapStoreToProps = ([, dispatch], { todo }) => ({

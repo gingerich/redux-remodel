@@ -2,14 +2,15 @@ import React from "react";
 import { TodoItem } from "./TodoItem";
 import { TodoFooter } from "./TodoFooter";
 import { TodoInput } from "./TodoInput";
-import { Store, useFetchUserTodos } from "./todoStore";
-import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from "./constants";
+import Store, { useFetchUserTodos, useSetAppView } from "./store";
+import { ALL_TODOS } from "./constants";
 
 import "todomvc-app-css/index.css";
 
 export const App = ({ userId, view = ALL_TODOS }) => {
+  useSetAppView(view)
   useFetchUserTodos(userId);
-  return <TodoApp view={view} />;
+  return <TodoApp />;
 };
 
 const mapStoreToProps = ([state, dispatch]) => ({
@@ -41,23 +42,10 @@ export const TodoApp = Store.withStore(mapStoreToProps)(
       this.setState({ editing: null });
     };
 
-    getTodos() {
-      const { todos, active, completed } = this.props;
-
-      switch (this.props.view) {
-        case ACTIVE_TODOS:
-          return active;
-        case COMPLETED_TODOS:
-          return completed;
-        default:
-          return todos;
-      }
-    }
-
     render() {
-      const { active, addTodo } = this.props;
+      const { visibleTodos, active, addTodo } = this.props;
 
-      const todoItems = this.getTodos().map(todo => (
+      const todoItems = visibleTodos.map(todo => (
         <TodoItem
           key={todo.id}
           todo={todo}
