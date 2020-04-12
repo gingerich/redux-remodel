@@ -54,7 +54,7 @@ export const TodoItem = ({ todo, editing, onSave, onEdit, onCancel }) => {
         <input
           className="toggle"
           type="checkbox"
-          checked={todo.completed}
+          checked={!!todo.completed}
           onChange={onToggle}
         />
         <label onDoubleClick={handleEdit}>{todo.title}</label>
