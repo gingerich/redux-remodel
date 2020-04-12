@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ENTER_KEY } from './constants';
+import { ENTER_KEY } from '../constants';
 
 export const TodoInput = ({ onSave }) => {
 	const [ state, setState ] = useState({ input: '' });

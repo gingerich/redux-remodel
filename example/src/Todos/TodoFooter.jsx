@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
-import Store from './store';
-import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from './constants';
+import Store from '../store';
+import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from '../constants';
 
 export const TodoFooter = withRouter(({ nowShowing, match }) => {
 	const [ { active, completed }, { clearCompleted } ] = Store.useStore();

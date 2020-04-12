@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { TodoItem } from './TodoItem';
 import { TodoFooter } from './TodoFooter';
 import { TodoInput } from './TodoInput';
-import { Store, useSetAppView } from './store';
-import { ALL_TODOS } from './constants';
+import Store, { useSetAppView, useFetchUserTodos } from '../store';
+import { ALL_TODOS } from '../constants';
 
 import 'todomvc-app-css/index.css';
 
-export const App = ({ view = ALL_TODOS }) => {
+export default ({ view = ALL_TODOS }) => {
 	useSetAppView(view);
+	useFetchUserTodos();
 	return <TodoApp />;
 };
 
@@ -33,8 +34,6 @@ export const TodoApp = () => {
 	const cancel = () => {
 		setState({ editing: null });
 	};
-
-	console.log('hghjk', view, visibleTodos);
 
 	const todoItems = visibleTodos.map((todo) => (
 		<TodoItem

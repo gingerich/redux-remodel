@@ -6,7 +6,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import Store from './store';
-import { App as Todos } from './TodoApp';
+import { Todos } from './Todos';
 
 // Mock current user
 const currentUser = {

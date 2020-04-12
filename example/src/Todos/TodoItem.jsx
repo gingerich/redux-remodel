@@ -1,19 +1,17 @@
 import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
-import { Store } from './store';
-import { ENTER_KEY, ESCAPE_KEY } from './constants';
-
-const mapStoreToProps = ([ state, dispatch ], { todo }) => ({
-	onToggle: () => dispatch.toggleTodo(todo),
-	onDestroy: () => dispatch.destroy(todo)
-});
+import Store from '../store';
+import { ENTER_KEY, ESCAPE_KEY } from '../constants';
 
 export const TodoItem = ({ todo, editing, onSave, onEdit, onCancel }) => {
-	const [ , { toggleTodo: onToggle, destroy: onDestroy } ] = Store.useStore();
+	const [ , dispatch] = Store.useStore();
 	const [ state, setState ] = useState({
-		editText: todo.title
+		editText: todo.title || ''
 	});
 	const editField = useRef(null);
+
+	const onToggle = () => dispatch.toggleTodo(todo);
+	const onDestroy = () => dispatch.destroy(todo);
 
 	const handleSubmit = () => {
 		const val = state.editText.trim();
