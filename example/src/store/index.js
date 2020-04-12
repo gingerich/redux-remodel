@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import { useModel } from 'redux-remodel-react';
-import { makeStore } from '../makeStore';
+import { useModel, makeStore } from 'redux-remodel-react';
 import app from './app';
 
 // Create a hook for our model. Think useReducer()
