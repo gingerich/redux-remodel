@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import Store from '../store';
 import { ALL_TODOS, ACTIVE_TODOS, COMPLETED_TODOS } from '../constants';
 
-export const TodoFooter = withRouter(({ nowShowing, match }) => {
-	const [ { active, completed }, { clearCompleted } ] = Store.useStore();
+export const TodoFooter = withRouter(({ match }) => {
+	const [ { active, completed, view }, { clearCompleted } ] = Store.useStore();
 	const { userId } = match.params;
 
 	return (
@@ -15,7 +15,7 @@ export const TodoFooter = withRouter(({ nowShowing, match }) => {
 			</span>
 			<ul className="filters">
 				<li>
-					<a href={`#/${userId}/`} className={classNames({ selected: nowShowing === ALL_TODOS })}>
+					<a href={`#/${userId}/`} className={classNames({ selected: view === ALL_TODOS })}>
 						All
 					</a>
 				</li>{' '}
@@ -23,7 +23,7 @@ export const TodoFooter = withRouter(({ nowShowing, match }) => {
 					<a
 						href={`#/${userId}/active`}
 						className={classNames({
-							selected: nowShowing === ACTIVE_TODOS
+							selected: view === ACTIVE_TODOS
 						})}
 					>
 						Active
@@ -33,7 +33,7 @@ export const TodoFooter = withRouter(({ nowShowing, match }) => {
 					<a
 						href={`#/${userId}/completed`}
 						className={classNames({
-							selected: nowShowing === COMPLETED_TODOS
+							selected: view === COMPLETED_TODOS
 						})}
 					>
 						Completed

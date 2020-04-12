@@ -15,7 +15,7 @@ export default ({ view = ALL_TODOS }) => {
 
 export const TodoApp = () => {
 	const [ state, setState ] = useState({ editing: null });
-	const [ { active, visibleTodos, view }, dispatch ] = Store.useStore();
+	const [ { active, visibleTodos }, dispatch ] = Store.useStore();
 
 	const toggleAll = (event) => {
 		const { checked } = event.target;
@@ -63,7 +63,7 @@ export const TodoApp = () => {
 				<label htmlFor="toggle-all" />
 				<ul className="todo-list">{todoItems}</ul>
 			</section>
-			<TodoFooter nowShowing={view} />
+			<TodoFooter />
 		</div>
 	);
 };
