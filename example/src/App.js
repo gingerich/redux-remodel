@@ -1,21 +1,21 @@
-import React from "react";
+import React from 'react';
 import {
   HashRouter as Router,
   Route,
   Switch,
   Redirect
-} from "react-router-dom";
-import { App as Todos } from "./TodoApp";
-import Store from "./store";
+} from 'react-router-dom';
+import Store from './store';
+import { App as Todos } from './TodoApp';
 
 // Mock current user
 const currentUser = {
   id: '123'
-}
+};
 
 export default () => (
   <Store.Provider>
-    <Router basename="/todos">
+    <Router>
       <Switch>
         <Route
           path="/:userId/:view?"

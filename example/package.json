@@ -5,13 +5,14 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "@react-workspaces/react-scripts": "^3.3.0-alpha-08",
     "classnames": "^2.2.6",
-    "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^1.1.4",
-    "redux-remodel": "file:..",
+    "redux-remodel": "0.1.0",
+    "redux-remodel-react": "0.1.0",
     "todomvc-app-css": "^2.3.0"
   },
   "scripts": {
@@ -19,6 +20,18 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "prepare": "npm link ../node_modules/react || echo \"Failed to link react\""
+    "prepare": "npm link ../node_modules/react"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

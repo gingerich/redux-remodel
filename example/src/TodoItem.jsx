@@ -1,82 +1,70 @@
-import React from "react";
-import classNames from "classnames";
-import Store from "./store";
-import { ENTER_KEY, ESCAPE_KEY } from "./constants";
+import React, { useState, useRef } from 'react';
+import classNames from 'classnames';
+import { Store } from './store';
+import { ENTER_KEY, ESCAPE_KEY } from './constants';
 
-const mapStoreToProps = ([, dispatch], { todo }) => ({
-  onToggle: () => dispatch.toggleTodo(todo),
-  onDestroy: () => dispatch.destroy(todo)
+const mapStoreToProps = ([ state, dispatch ], { todo }) => ({
+	onToggle: () => dispatch.toggleTodo(todo),
+	onDestroy: () => dispatch.destroy(todo)
 });
 
-export const TodoItem = Store.withStore(mapStoreToProps)(
-  class TodoItem extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        editText: props.todo.title
-      };
-    }
+export const TodoItem = ({ todo, editing, onSave, onEdit, onCancel }) => {
+	const [ , { toggleTodo: onToggle, destroy: onDestroy } ] = Store.useStore();
+	const [ state, setState ] = useState({
+		editText: todo.title
+	});
+	const editField = useRef(null);
 
-    handleSubmit = () => {
-      var val = this.state.editText.trim();
-      if (val) {
-        this.props.onSave(val);
-        this.setState({ editText: val });
-      } else {
-        this.props.onDestroy();
-      }
-    };
+	const handleSubmit = () => {
+		const val = state.editText.trim();
+		if (val) {
+			onSave(val);
+			setState({ editText: val });
+		} else {
+			onDestroy();
+		}
+	};
 
-    handleEdit = () => {
-      this.props.onEdit();
-      this.setState({ editText: this.props.todo.title });
-    };
+	const handleEdit = () => {
+		onEdit();
+		setState({ editText: todo.title });
+	};
 
-    handleKeyDown = event => {
-      if (event.which === ESCAPE_KEY) {
-        this.setState({ editText: this.props.todo.title });
-        this.props.onCancel(event);
-      } else if (event.which === ENTER_KEY) {
-        this.handleSubmit(event);
-      }
-    };
+	const handleKeyDown = (event) => {
+		if (event.which === ESCAPE_KEY) {
+			setState({ editText: todo.title });
+			onCancel(event);
+		} else if (event.which === ENTER_KEY) {
+			handleSubmit(event);
+		}
+	};
 
-    handleChange = event => {
-      if (this.props.editing) {
-        this.setState({ editText: event.target.value });
-      }
-    };
+	const handleChange = (event) => {
+		if (editing) {
+			setState({ editText: event.target.value });
+		}
+	};
 
-    render() {
-      const { todo, editing, onToggle, onDestroy } = this.props;
-
-      return (
-        <li
-          className={classNames({
-            completed: todo.completed,
-            editing: editing
-          })}
-        >
-          <div className="view">
-            <input
-              className="toggle"
-              type="checkbox"
-              checked={todo.completed}
-              onChange={onToggle}
-            />
-            <label onDoubleClick={this.handleEdit}>{todo.title}</label>
-            <button className="destroy" onClick={onDestroy} />
-          </div>
-          <input
-            ref="editField"
-            className="edit"
-            value={this.state.editText}
-            onBlur={this.handleSubmit}
-            onChange={this.handleChange}
-            onKeyDown={this.handleKeyDown}
-          />
-        </li>
-      );
-    }
-  }
-);
+	return (
+		<li
+			className={classNames({
+				completed: todo.completed,
+				editing
+			})}
+		>
+			<div className="view">
+				<input className="toggle" type="checkbox" checked={todo.completed} onChange={onToggle} />
+				<label onDoubleClick={handleEdit}>{todo.title}</label>
+				<button className="destroy" onClick={onDestroy} />
+			</div>
+			<input
+				ref={editField}
+				className="edit"
+				value={state.editText}
+				onBlur={handleSubmit}
+				onChange={handleChange}
+				onKeyDown={handleKeyDown}
+			/>
+		</li>
+	);
+};

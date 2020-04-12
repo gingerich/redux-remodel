@@ -1,0 +1,24 @@
+{
+  "name": "redux-remodel",
+  "version": "0.1.0",
+  "description": "Compose reducers with simple declarative data models",
+  "main": "build/index.js",
+  "main:src": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.0.4",
+    "immer": "^5.0.0",
+    "reduce-reducers": "^1.0.4"
+  },
+  "keywords": [
+    "redux",
+    "reducer",
+    "composable",
+    "declarative"
+  ],
+  "author": "",
+  "license": "MIT"
+}

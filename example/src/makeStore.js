@@ -1,8 +1,8 @@
-import React, { useContext, useState, useMemo } from "react";
+import React, { useContext, useState, useMemo } from 'react';
 
 export function makeStore(useModel = useState, defaultValue) {
   // Make a context for the store
-  const context = React.createContext(defaultValue);
+  const Context = React.createContext(defaultValue);
 
   // Make a provider that takes an initialState
   const Provider = ({ initialState, children }) => {
@@ -12,14 +12,14 @@ export function makeStore(useModel = useState, defaultValue) {
     const deps = Array.isArray(model) ? model : [model];
 
     // Memoize the context value to update when the state does
-    const contextValue = useMemo(() => model, deps);
+    const contextValue = useMemo(() => model, [model]);
 
     // Provide the store to children
-    return <context.Provider value={contextValue}>{children}</context.Provider>;
+    return <Context.Provider value={contextValue}>{children}</Context.Provider>;
   };
 
-  // A hook to help consume the store
-  const useStore = () => useContext(context);
+  // A hook to consume the store
+  const useStore = () => useContext(Context);
 
   // A HoC to map a store into component props
   const withStore = (

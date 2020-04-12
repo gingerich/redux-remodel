@@ -1,40 +1,36 @@
-import React from "react";
-import { ENTER_KEY } from "./constants";
+import React, { useState } from 'react';
+import { ENTER_KEY } from './constants';
 
-export class TodoInput extends React.Component {
-  state = {
-    input: ""
-  };
+export const TodoInput = ({ onSave }) => {
+	const [ state, setState ] = useState({ input: '' });
 
-  handleChange = event => {
-    this.setState({ input: event.target.value });
-  };
+	const handleChange = (event) => {
+		setState({ input: event.target.value });
+	};
 
-  handleNewTodoKeyDown = event => {
-    if (event.keyCode !== ENTER_KEY) {
-      return;
-    }
+	const handleNewTodoKeyDown = (event) => {
+		if (event.keyCode !== ENTER_KEY) {
+			return;
+		}
 
-    event.preventDefault();
+		event.preventDefault();
 
-    const val = this.state.input.trim();
+		const val = state.input.trim();
 
-    if (val) {
-      this.props.onSave(val);
-      this.setState({ input: "" });
-    }
-  };
+		if (val) {
+			onSave(val);
+			setState({ input: '' });
+		}
+	};
 
-  render() {
-    return (
-      <input
-        className="new-todo"
-        placeholder="What needs to be done?"
-        value={this.state.input}
-        onKeyDown={this.handleNewTodoKeyDown}
-        onChange={this.handleChange}
-        autoFocus={true}
-      />
-    );
-  }
-}
+	return (
+		<input
+			className="new-todo"
+			placeholder="What needs to be done?"
+			value={state.input}
+			onKeyDown={handleNewTodoKeyDown}
+			onChange={handleChange}
+			autoFocus
+		/>
+	);
+};
