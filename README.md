@@ -18,50 +18,26 @@ npm install --save redux-remodel
 
 Define a todos model
 
-```jsx
-import { createModel } from 'redux-remodel';
-
-const uuid = () => Math.round(Math.random() * 10000);
-
+```js
 const todos = {
   actions: {
     addTodo: (todos, { payload }) => {
-      todos.push({ id: uuid(), title: payload });
-    },
-    setTodos: (todos, { payload }) => {
-      return payload;
+      todos.push({ id: todos.length + 1, title: payload });
     },
     toggleTodo: (todos, { payload }) => {
       const todo = todos.find((t) => t.id === payload.id);
       if (todo) {
         todo.completed = !todo.completed;
       }
-    },
-    toggleAll: (todos, { payload: completed }) => {
-      todos.forEach((todo) => void (todo.completed = completed));
-    },
-    save: (todos, { payload }) => {
-      const todo = todos.find((t) => t.id === payload.id);
-      if (todo) {
-        todo.title = payload.title;
-      }
-    },
-    clearCompleted: (todos) => {
-      return todos.filter((t) => !t.completed);
-    },
-    destroy: (todos, { payload: todo }) => {
-      return todos.filter((t) => t.id !== todo.id);
     }
   }
 };
-
-const todosReducer = createModel([], todos);
 ```
 
-Use todos to compose another model
+Declare a new model by composing todos
 
-```jsx
-import { createModel, select } from 'redux-remodel';
+```js
+import { createModel } from 'redux-remodel';
 
 const initialState = { view: 'all' };
 
@@ -69,13 +45,23 @@ const app = createModel(initialState, {
   slices: {
     todos: createModel([], todos)
   },
-  computed: {
-    active: select((todos) => todos.filter((t) => !t.completed), 'todos'),
-    completed: select((todos) => todos.filter((t) => t.completed), 'todos')
-  },
   actions: {
     setView: (state, { payload: view }) => {
       state.view = view;
+    }
+  },
+  computed: {
+    active: ({ todos }) => todos.filter((t) => !t.completed),
+    completed: ({ todos }) => todos.filter((t) => t.completed),
+    visibleTodos: (state) => {
+      switch (state.view) {
+        case 'ACTIVE':
+          return state.active;
+        case 'COMPLETED':
+          return state.completed;
+        default:
+          return state.todos;
+      }
     }
   }
 });
@@ -83,19 +69,25 @@ const app = createModel(initialState, {
 
 Use like a reducer function
 
-```jsx
+```js
 let state;
-state = app(state, app.actions.addTodo('My Todo'));
+state = app(state, { type: 'addTodo', payload: 'My Todo' });
 
 console.log(state);
 /*
 {
   view: 'all',
-  todos: [{ id: 123, title: 'My Todo' }],
-  active: [{ id: 123, title: 'My Todo' }],
+  todos: [{ id: 1, title: 'My Todo' }],
+  active: [{ id: 1, title: 'My Todo' }],
   completed: []
 }
 */
+```
+
+The returned reducer is decorated with action creators
+
+```js
+app(state, app.actions.addTodo('My Todo'))
 ```
 
 ## License
