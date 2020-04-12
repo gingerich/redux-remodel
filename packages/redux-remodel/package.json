@@ -1,6 +1,6 @@
 {
   "name": "redux-remodel",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Compose reducers with simple declarative data models",
   "main": "build/index.js",
   "main:src": "src/index.js",

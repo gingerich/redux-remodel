@@ -1,7 +1,7 @@
 {
   "name": "redux-remodel-example",
   "homepage": "https://.github.io/redux-remodel",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "license": "MIT",
   "private": true,
   "dependencies": {
@@ -11,8 +11,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
-    "redux-remodel": "0.1.0",
-    "redux-remodel-react": "0.1.0",
+    "redux-remodel": "0.1.1",
+    "redux-remodel-react": "0.1.1",
     "todomvc-app-css": "^2.3.0"
   },
   "scripts": {
