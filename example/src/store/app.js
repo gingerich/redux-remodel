@@ -8,9 +8,9 @@ export const app = {
     todos
   },
   computed: {
-    active: ({ todos }) => todos.filter(t => !t.completed),
-    completed: ({ todos }) => todos.filter(t => t.completed),
-    visibleTodos: state => {
+    active: ({ todos }) => todos.filter((t) => !t.completed),
+    completed: ({ todos }) => todos.filter((t) => t.completed),
+    visibleTodos: (state) => {
       switch (state.view) {
         case ACTIVE_TODOS:
           return state.active;
@@ -24,10 +24,13 @@ export const app = {
   actions: {
     setView: (state, { payload: view }) => {
       state.view = view;
+    },
+    setLoading(state, loading) {
+      state.loading = loading ?? !state.loading;
     }
   }
 };
 
-export const initialState = { view: ALL_TODOS };
+export const initialState = { view: ALL_TODOS, loading: false };
 
 export default createModel(initialState, app);

@@ -25,7 +25,7 @@ module.exports = {
       name: 'redux-remodel'
     }),
     jest({
-      testRegex: undefined, // force to use jest default value
+      testRegex: undefined // force to use jest default value
       // collectCoverageFrom: [
       //   'packages/**/*.{js,jsx}',
       //   '!**/build/**',
@@ -33,7 +33,7 @@ module.exports = {
       // ]
     }),
     /* Prettier */
-    neutrino => {
+    (neutrino) => {
       const eslintOptions = neutrino.config.module
         .rule('lint')
         .use('eslint')
@@ -45,7 +45,8 @@ module.exports = {
         return {
           semi: true,
           singleQuote: true,
-          tabWidth: 2
+          tabWidth: 2,
+          trailingComma: 'none'
         };
       });
     }

@@ -32,25 +32,25 @@ const todos = {
       return payload;
     },
     toggleTodo: (todos, { payload }) => {
-      const todo = todos.find(t => t.id === payload.id);
+      const todo = todos.find((t) => t.id === payload.id);
       if (todo) {
         todo.completed = !todo.completed;
       }
     },
     toggleAll: (todos, { payload: completed }) => {
-      todos.forEach(todo => void (todo.completed = completed));
+      todos.forEach((todo) => void (todo.completed = completed));
     },
     save: (todos, { payload }) => {
-      const todo = todos.find(t => t.id === payload.id);
+      const todo = todos.find((t) => t.id === payload.id);
       if (todo) {
         todo.title = payload.title;
       }
     },
-    clearCompleted: todos => {
-      return todos.filter(t => !t.completed);
+    clearCompleted: (todos) => {
+      return todos.filter((t) => !t.completed);
     },
     destroy: (todos, { payload: todo }) => {
-      return todos.filter(t => t.id !== todo.id);
+      return todos.filter((t) => t.id !== todo.id);
     }
   }
 };
@@ -70,8 +70,8 @@ const app = createModel(initialState, {
     todos: createModel([], todos)
   },
   computed: {
-    active: select(todos => todos.filter(t => !t.completed), 'todos'),
-    completed: select(todos => todos.filter(t => t.completed), 'todos')
+    active: select((todos) => todos.filter((t) => !t.completed), 'todos'),
+    completed: select((todos) => todos.filter((t) => t.completed), 'todos')
   },
   actions: {
     setView: (state, { payload: view }) => {

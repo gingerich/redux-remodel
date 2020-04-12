@@ -4,16 +4,17 @@ import purify, { original } from 'immer';
 
 const withActions = (reducer, actions) => Object.assign(reducer, { actions });
 
-const originalize = r => (state, action) => r(original(state) || state, action);
+const originalize = (r) => (state, action) =>
+  r(original(state) || state, action);
 
-const makeSelector = selector => {
+const makeSelector = (selector) => {
   if (typeof selector === 'function') {
     return selector;
   }
   if (typeof selector === 'string') {
-    return state => state[selector];
+    return (state) => state[selector];
   }
-  return state => state;
+  return (state) => state;
 };
 
 export function createModel(initialState, ...reducers) {
@@ -31,7 +32,7 @@ export function createModel(initialState, ...reducers) {
     return createModel(initialState, reducers);
   }
 
-  const purifiedReducers = reducers.map(reducer =>
+  const purifiedReducers = reducers.map((reducer) =>
     originalize(purify(reducer))
   );
 
@@ -88,7 +89,7 @@ export function createComputed(properties) {
     {}
   );
 
-  return state => {
+  return (state) => {
     if (!Object.keys(selectors).length) {
       return state;
     }
