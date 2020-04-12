@@ -27,7 +27,7 @@ export const TodoApp = () => {
   };
 
   const save = (todo, newTitle) => {
-    dispatch.save(todo, newTitle);
+    dispatch.save({ ...todo, title: newTitle });
     setState({ editing: null });
   };
 
