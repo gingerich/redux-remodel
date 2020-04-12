@@ -10,17 +10,12 @@
     "lint": "eslint --cache --format codeframe --ext mjs,js src test"
   },
   "devDependencies": {
-    "react": "^16.13.1",
-    "redux": "^4.0.5"
+    "react": "^16.13.1"
   },
   "peerDependencies": {
-    "react": "^16.8.0",
-    "redux": "^4.0.0"
+    "react": "^16.8.0"
   },
   "keywords": [],
   "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "react": "^16.13.1"
-  }
+  "license": "MIT"
 }

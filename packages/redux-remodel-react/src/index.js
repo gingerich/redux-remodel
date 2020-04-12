@@ -1,5 +1,5 @@
 import React, { useReducer, useMemo, useContext, useState } from 'react';
-import { bindActionCreators } from 'redux';
+import bindActionCreators from './bindActionCreators';
 
 export function makeStore(useModel = useState, defaultValue) {
   // Make a context for the store
