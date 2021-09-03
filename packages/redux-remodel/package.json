@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.0.4",
-    "immer": "^5.0.0",
+    "immer": "^9.0.6",
     "reduce-reducers": "^1.0.4"
   },
   "keywords": [
